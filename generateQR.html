@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>QR Code Generator</title>
+    <style>
+        .container {
+            padding-top: 2rem;
+        }
+
+        .text-container{
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .button{
+            width: fit-content;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+	<h1>QR Code Generator</h1>
+    <div class="text-container">
+        <input type="text" id="url" placeholder="Enter URL">
+        <button onclick="generateQR()" class="button">Generate QR Code</button>
+    </div>
+
+	<div class="container" id="qrcode"></div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+	<script>
+		function generateQR() {
+			var url = document.getElementById("url").value;
+			var qrcode = new QRCode(document.getElementById("qrcode"), url);
+		}
+
+		function downloadQR() {
+			var qrcode = document.getElementById("qrcode");
+			var link = document.createElement('a');
+			link.href = qrcode.firstChild.src;
+			link.download = 'qrcode.png';
+			link.style.display = 'none';
+			document.body.appendChild(link);
+			link.click();
+		}
+	</script>
+</body>
+</html>
